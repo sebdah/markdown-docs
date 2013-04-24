@@ -22,42 +22,47 @@ class MarkdownFile:
     # Full path to the source markdown file
     source_file = None
 
-    # Root output directory
+    # Dir for the outputed HTML file
     destination_dir = None
 
     # Full path to the destination HTML file
     destination_file = None
 
+    # Root output directory
+    destination_root_dir = None
+
     # Relative path to the markdown source file (relative to source_dir)
     relative_source_file = None
 
-    # Relative path to the HTML page (relative to destination_dir)
+    # Relative path to the HTML page (relative to destination_root_dir)
     relative_destination_file = None
 
-    def __init__(self, source_file, source_dir, destination_dir):
+    def __init__(self, source_file, source_dir, destination_root_dir):
         """ Constructor
 
         :type source_file: str
         :param source_file: Full path to the markdown file
         :type source_dir: str
         :param source_dir: Starting point for this indexing
-        :type destination_dir: str
-        :param destination_dir: Destination folder for HTML pages
+        :type destination_root_dir: str
+        :param destination_root_dir: Destination folder for HTML pages
         """
         self.source_file = source_file
         self.source_dir = source_dir
-        self.destination_dir = destination_dir
+        self.destination_root_dir = destination_root_dir
 
         self.relative_source_file = self.source_file.replace(
             '{}/'.format(source_dir), '')
 
         self.destination_file = os.path.join(
-            self.destination_dir, self.relative_source_file)
+            self.destination_root_dir, self.relative_source_file)
         self.destination_file = self.destination_file.rsplit('.', 1)[0]
         self.destination_file = '{}.html'.format(self.destination_file)
 
+        self.destination_dir = os.path.dirname(self.destination_file)
+
         self.relative_destination_file = self.destination_file.replace(
-            '{}/'.format(destination_dir), '')
+            '{}/'.format(destination_root_dir), '')
 
         # Generate the metadata
         self.generate_metadata()
@@ -101,33 +106,33 @@ def main():
         source_dir = os.path.realpath(os.path.curdir)
 
     if args.output:
-        destination_dir = os.path.expandvars(os.path.expanduser(args.output))
+        destination_root_dir = os.path.expandvars(os.path.expanduser(args.output))
 
         try:
-            os.makedirs(destination_dir)
+            os.makedirs(destination_root_dir)
         except OSError as (errno, errmsg):
             if errno == 17:
                 # Code 17 == File exists
                 pass
             else:
-                print('Error creating {}: {}'.format(destination_dir, errmsg))
+                print('Error creating {}: {}'.format(destination_root_dir, errmsg))
                 sys.exit(1)
     else:
-        destination_dir = tempfile.mkdtemp(prefix='owl')
+        destination_root_dir = tempfile.mkdtemp(prefix='owl')
 
-    markdown_files = find_markdown_files(source_dir, destination_dir)
+    markdown_files = find_markdown_files(source_dir, destination_root_dir)
     generate_html(markdown_files)
     generate_index_page(markdown_files)
-    import_static_files(destination_dir)
+    import_static_files(destination_root_dir)
 
 
-def find_markdown_files(source_dir, destination_dir):
+def find_markdown_files(source_dir, destination_root_dir):
     """ Returns a list of all Markdown files
 
     :type source_dir: str
     :param source_dir: Where should the Owl start looking?
-    :type destination_dir: str
-    :param destination_dir: Path to the output dir
+    :type destination_root_dir: str
+    :param destination_root_dir: Path to the output dir
     :returns: list -- List of MarkdownFile objects
     """
     md_files_dict = {}
@@ -139,7 +144,7 @@ def find_markdown_files(source_dir, destination_dir):
                     md_file = MarkdownFile(
                         os.path.join(dirpath, filename),
                         source_dir,
-                        destination_dir)
+                        destination_root_dir)
                     md_files_dict[os.path.join(dirpath, filename)] = md_file
 
             except ValueError:
@@ -182,7 +187,7 @@ def generate_html(markdown_files):
             html = template.render(
                 {
                     'title': markdown_file.get_metadata('title'),
-                    'destination_dir': markdown_file.destination_dir,
+                    'destination_root_dir': markdown_file.destination_root_dir,
                     'markdown_html': markdown2.markdown(
                         text,
                         extras=['fenced-code-blocks'])
@@ -209,7 +214,7 @@ def generate_index_page(markdown_files):
     for markdown_file in markdown_files:
         markdown_metadata.append(markdown_file.metadata)
 
-    index_path = os.path.join(markdown_file.destination_dir, 'index.html')
+    index_path = os.path.join(markdown_file.destination_root_dir, 'index.html')
     with open(index_path, 'w') as file_handle:
         file_handle.write(template.render(
             {
@@ -217,20 +222,20 @@ def generate_index_page(markdown_files):
             }))
 
 
-def import_static_files(destination_dir):
+def import_static_files(destination_root_dir):
     """ Import all static files to the HTML output dir
 
-    :type destination_dir: str
-    :param destination_dir: Destination folder for HTML pages
+    :type destination_root_dir: str
+    :param destination_root_dir: Destination folder for HTML pages
     """
-    if os.path.exists(os.path.join(destination_dir, '_owl_static')):
+    if os.path.exists(os.path.join(destination_root_dir, '_owl_static')):
         shutil.rmtree(
-            os.path.join(destination_dir, '_owl_static'),
+            os.path.join(destination_root_dir, '_owl_static'),
             ignore_errors=True)
 
     shutil.copytree(
         os.path.join(os.path.dirname(__file__), 'static'),
-        os.path.join(destination_dir, '_owl_static'))
+        os.path.join(destination_root_dir, '_owl_static'))
 
 
 if __name__ == '__main__':
