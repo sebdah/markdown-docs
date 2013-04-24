@@ -9,7 +9,7 @@ import tempfile
 import argparse
 
 import jinja2
-import markdown
+import markdown2
 
 
 class MarkdownFile:
@@ -183,9 +183,9 @@ def generate_html(markdown_files):
                 {
                     'title': markdown_file.get_metadata('title'),
                     'destination_dir': markdown_file.destination_dir,
-                    'markdown_html': markdown.markdown(
+                    'markdown_html': markdown2.markdown(
                         text,
-                        output_format='html5')
+                        extras=['fenced-code-blocks'])
                 })
 
             file_handle.write(html)
