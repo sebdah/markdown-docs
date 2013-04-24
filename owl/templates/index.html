@@ -1,0 +1,14 @@
+<html>
+<head>
+  <title>Owl documentation</title>
+  <link rel="stylesheet" type="text/css" href="_owl_static/css/owl.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="_owl_static/css/markdown.css" media="screen" />
+</head>
+<body>
+  <span class='owl-title'>Owl documentation</span>
+  <hr />
+  {% for markdown_file in markdown_metadata %}
+    {{ markdown_file.path }} > <a href='{{ markdown_file.url }}'>{{ markdown_file.title }}</a><br />
+  {% endfor %}
+</body>
+</html>
