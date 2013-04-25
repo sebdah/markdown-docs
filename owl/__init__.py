@@ -24,9 +24,8 @@ import shutil
 import tempfile
 import argparse
 
-from flask import Flask, redirect, send_from_directory
-
 import owl.generator
+import owl.web_server
 from owl.markdown_file import MarkdownFile
 from owl.log_handler import LOGGER as logger
 
@@ -92,7 +91,7 @@ def main():
         logger.info('Done with documentation generation!')
 
         if args.serve and not args.generate:
-            run_webserver(destination_root_dir)
+            owl.web_server.run_webserver(destination_root_dir)
         if args.generate:
             logger.info('HTML output can be found in {}'.format(
                 destination_root_dir))
@@ -132,24 +131,3 @@ def find_markdown_files(source_dir, destination_root_dir):
     for md_file in sorted(md_files_dict):
         markdown_files.append(md_files_dict[md_file])
     return markdown_files
-
-
-def run_webserver(destination_root_dir):
-    """ Run a local """
-    destination_root_dir = destination_root_dir
-    if destination_root_dir.startswith('/'):
-        destination_root_dir = destination_root_dir[1:]
-
-    if destination_root_dir.endswith('/'):
-        destination_root_dir = destination_root_dir[:-1]
-
-    app = Flask(__name__)
-    @app.route('/<path:filename>')
-    def index(filename='index.html'):
-        if filename.startswith(destination_root_dir):
-            filename = filename.replace('{}/'.format(destination_root_dir), '')
-            return redirect('/{}'.format(filename))
-        return send_from_directory('/{}'.format(destination_root_dir), filename)
-
-    app.run()
-
