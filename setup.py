@@ -3,7 +3,7 @@ from setuptools import setup
 
 
 setup(name='owl',
-    version='0.0.3',
+    version='0.1.0',
     license='Apache License, Version 2.0',
     description='Documentation generator for Markdown projects',
     author='Sebastian Dahlgren',
