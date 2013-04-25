@@ -3,7 +3,7 @@
 html, body {
   padding:1em;
   margin:auto;
-  max-width:42em;
+  max-width:62em;
   background:#fefefe; }
 
 body {
@@ -12,7 +12,7 @@ body {
   line-height: 1.4; }
 
 header, nav, article, footer {
-  width: 700px;
+  width: 62em;
   margin:0 auto;}
 
 article {
