@@ -61,7 +61,10 @@ def generate_html(markdown_files):
                     'destination_root_dir': markdown_file.destination_root_dir,
                     'markdown_html': markdown2.markdown(
                         text,
-                        extras=['fenced-code-blocks', 'wiki-tables'])
+                        extras=[
+                            'fenced-code-blocks',
+                            'wiki-tables',
+                            'metadata'])
                 })
             file_handle.write(html.encode('utf-8'))
 
