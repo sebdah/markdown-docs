@@ -5,10 +5,19 @@
   <link rel="stylesheet" type="text/css" href="_owl_static/css/markdown.css" media="screen" />
 </head>
 <body>
-  <span class='owl-title'>Owl documentation</span>
-  <hr />
-  {% for markdown_file in markdown_metadata %}
-    {{ markdown_file.path }} > <a href='{{ markdown_file.url }}'>{{ markdown_file.title }}</a><br />
-  {% endfor %}
+  <div id='owl-title'>
+    Owl documentation
+  </div>
+
+  <div id='owl-markdown-files'>
+    {% for markdown_file in markdown_metadata %}
+      <span class='owl-markdown-path'>{{ markdown_file.short_path }}</span>/<a href='{{ markdown_file.url }}'>{{ markdown_file.title }}</a><br />
+    {% endfor %}
+  </div>
+
+  <footer id='owl-footer'>
+    Documentation generated at {{ generation_timestamp }}. <br />
+    This documentation was generated using Owl, a project maintained by <a href='http://www.sebastiandahlgren.se'>Sebastian Dahlgren</a>.
+  </footer>
 </body>
 </html>

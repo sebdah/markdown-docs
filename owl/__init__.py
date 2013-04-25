@@ -7,6 +7,7 @@ import sys
 import shutil
 import tempfile
 import argparse
+import datetime
 
 import jinja2
 import markdown2
@@ -72,7 +73,9 @@ class MarkdownFile:
         self.metadata = {
             'title': os.path.basename(self.source_file),
             'url': self.relative_destination_file,
-            'path': os.path.dirname(self.relative_destination_file)
+            'full_path': os.path.dirname(self.relative_destination_file),
+            'short_path': self.shorten_path(
+                os.path.dirname(self.relative_destination_file))
         }
 
     def get_metadata(self, attribute):
@@ -81,6 +84,41 @@ class MarkdownFile:
         :returns: str or None -- Returns the attribute
         """
         return self.metadata.get(attribute, None)
+
+    def shorten_path(self, full_path, max_length=40):
+        """ Takes a full path like/this/one and returns like/t/one
+
+        The function will try to return as long paths as possible
+
+        :type full_path: str
+        :param full_path: Full path to shorten
+        :type max_length: int
+        :param max_length: Max length for the path
+        :returns: str -- Short version of the path
+        """
+        if len(full_path) <= max_length:
+            return full_path
+        else:
+            need_to_save = len(full_path) - max_length
+
+        shortened_path = []
+        for index, folder in enumerate(full_path.split('/')):
+            if index == 0:
+                shortened_path.append(folder)
+                continue
+
+            elif index+1 == len(full_path.split('/')):
+                shortened_path.append(folder)
+                continue
+
+            else:
+                if need_to_save > 0:
+                    shortened_path.append(folder[0])
+                    need_to_save = need_to_save - len(folder) + 1
+                else:
+                    shortened_path.append(folder)
+
+        return '/'.join(shortened_path)
 
 
 def main():
@@ -218,7 +256,9 @@ def generate_index_page(markdown_files):
     with open(index_path, 'w') as file_handle:
         file_handle.write(template.render(
             {
-                'markdown_metadata': markdown_metadata
+                'markdown_metadata': markdown_metadata,
+                'generation_timestamp': datetime.datetime.utcnow().strftime(
+                    '%Y-%m-%d %H:%M')
             }))
 
 
