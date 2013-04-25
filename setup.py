@@ -2,7 +2,7 @@
 from setuptools import setup
 
 
-setup(name='owl',
+setup(name='markdoc',
     version='0.2.0-SNAPSHOT',
     license='Apache License, Version 2.0',
     description='Documentation generator for Markdown projects',
@@ -10,11 +10,11 @@ setup(name='owl',
     author_email='sebastian.dahlgren@gmail.com',
     maintainer='Sebastian Dahlgren',
     maintainer_email='sebastian.dahlgren@gmail.com',
-    url='http://sebdah.github.com/owl/',
+    url='http://sebdah.github.com/markdoc/',
     keywords="markdown documentation md mdown",
     platforms=['Any'],
-    packages=['owl'],
-    scripts=['scripts/owl'],
+    packages=['markdoc'],
+    scripts=['scripts/markdoc'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[

@@ -1,6 +1,6 @@
-# owl - Documentation generator for Markdown projects
+# Markdoc - Documentation generator for Markdown projects
 
-Owl is a documentation generator for projects using Markdown. The problem with having Markdown files spread around your project is that it is hard to get an overview of all your documentation. Owl solves this by collecting all of your Markdown files into one browsable HTML hierarchy.
+Markdoc is a documentation generator for projects using Markdown. The problem with having Markdown files spread around your project is that it is hard to get an overview of all your documentation. Markdoc solves this by collecting all of your Markdown files into one browsable HTML hierarchy.
 
 ## Usage
 
@@ -9,27 +9,27 @@ Owl is a documentation generator for projects using Markdown. The problem with h
 Run the following to fire up a local web server with your documentation
 
     cd your/project/path
-    owl
+    markdoc
 
 or
 
-    owl serve
+    markdoc serve
 
 Then point your browser to [http://localhost:5000/](http://localhost:5000/).
 
 ### Generating HTML output
 
     cd your/project/path
-    owl generate --output ~/docs
+    markdoc generate --output ~/docs
 
 If you do not set `--output` a temporary directory will be created for you.
 
 
 ## Installation
 
-The easiest way is to install Owl via `pip`
+The easiest way is to install Markdoc via `pip`
 
-    pip install owl
+    pip install markdoc
 
 ## Features
 
@@ -39,22 +39,22 @@ The easiest way is to install Owl via `pip`
 - Reads title from [metadata](http://pythonhosted.org/Markdown/extensions/meta_data.html)
 - Support for the [Markdown tables extension](http://pythonhosted.org/Markdown/extensions/tables.html)
 - No Internet connection needed
-- Owl comes with an embedded web server for serving static HTML locally
+- Markdoc comes with an embedded web server for serving static HTML locally
 
 ### Metadata details
 
-Owl is looking for Markdown meta data. Currently Owl is only taking the `Title` meta data attribute in consideration. Meta data in Markdown looks like this
+Markdoc is looking for Markdown meta data. Currently Markdoc is only taking the `Title` meta data attribute in consideration. Meta data in Markdown looks like this
 
     Title: Document title
     Date: 2013-04-25
 
     This is where my Markdown really starts
 
-Using meta data in Owl is optional. If the `Title` tag is there, Owl will show that document title instead of the file name on the index page.
+Using meta data in Markdoc is optional. If the `Title` tag is there, Markdoc will show that document title instead of the file name on the index page.
 
 ### Syntax highlighting
 
-Owl supports syntax highlighting via the `Markdown` module. You can define the programming language by adding `:::language` as in this example
+Markdoc supports syntax highlighting via the `Markdown` module. You can define the programming language by adding `:::language` as in this example
 
     :::python
     print('This is highlighted as Python code')
@@ -63,7 +63,7 @@ More details can be found in the [module docs](http://pythonhosted.org/Markdown/
 
 ### Adding Table of contents
 
-A table of contents will be automatically generated in the HTML output if Owl finds a `[TOC]` tag anywhere in the Markdown.
+A table of contents will be automatically generated in the HTML output if Markdoc finds a `[TOC]` tag anywhere in the Markdown.
 
     # Table of contents
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-""" Owl markdown documentation reader
+""" Markdoc markdown documentation reader
 
 APACHE LICENSE 2.0
 Copyright 2013 Sebastian Dahlgren
@@ -24,16 +24,16 @@ import shutil
 import tempfile
 import argparse
 
-import owl.generator
-import owl.web_server
-from owl.markdown_file import MarkdownFile
-from owl.log_handler import LOGGER as logger
+import markdoc.generator
+import markdoc.web_server
+from markdoc.markdown_file import MarkdownFile
+from markdoc.log_handler import LOGGER as logger
 
 
 def main():
     """ Main function """
     parser = argparse.ArgumentParser(
-        description='Owl markdown documentation generator')
+        description='Markdoc markdown documentation generator')
     parser.add_argument('-d', '--directory',
         help='Root directory to parse from (default: current dir)')
     parser.add_argument('-o', '--output',
@@ -76,7 +76,7 @@ def main():
                     destination_root_dir, errmsg))
                 sys.exit(1)
     else:
-        destination_root_dir = tempfile.mkdtemp(prefix='owl')
+        destination_root_dir = tempfile.mkdtemp(prefix='markdoc')
         logger.debug('Using temporary folder: {}'.format(destination_root_dir))
         if not args.generate:
             temp_dir_used = True
@@ -85,13 +85,13 @@ def main():
         markdown_files = find_markdown_files(source_dir, destination_root_dir)
         logger.info('Generating documentation for {:d} markdown files..'.format(
             len(markdown_files)))
-        owl.generator.generate_html(markdown_files)
-        owl.generator.generate_index_page(markdown_files)
-        owl.generator.import_static_files(destination_root_dir)
+        markdoc.generator.generate_html(markdown_files)
+        markdoc.generator.generate_index_page(markdown_files)
+        markdoc.generator.import_static_files(destination_root_dir)
         logger.info('Done with documentation generation!')
 
         if args.serve and not args.generate:
-            owl.web_server.run_webserver(destination_root_dir)
+            markdoc.web_server.run_webserver(destination_root_dir)
         if args.generate:
             logger.info('HTML output can be found in {}'.format(
                 destination_root_dir))
@@ -107,7 +107,7 @@ def find_markdown_files(source_dir, destination_root_dir):
     """ Returns a list of all Markdown files
 
     :type source_dir: str
-    :param source_dir: Where should the Owl start looking?
+    :param source_dir: Where should the Markdoc start looking?
     :type destination_root_dir: str
     :param destination_root_dir: Path to the output dir
     :returns: list -- List of MarkdownFile objects
