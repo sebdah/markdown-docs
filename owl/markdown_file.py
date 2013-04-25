@@ -87,9 +87,22 @@ class MarkdownFile:
     def get_metadata(self, attribute):
         """ Returns the attribute attribute from self.metadata
 
+        :type attribute: str
+        :param attribute: Attribute to fetch
         :returns: str or None -- Returns the attribute
         """
         return self.metadata.get(attribute, None)
+
+    def set_metadata(self, attribute, value):
+        """ Update or create attribute
+
+        :type attribute: str
+        :param attribute: Attribute to fetch
+        :type value: str
+        :param value: value to set
+        :returns: None
+        """
+        self.metadata[attribute] = value
 
     def shorten_path(self, full_path, max_length=40):
         """ Takes a full path like/this/one and returns like/t/one

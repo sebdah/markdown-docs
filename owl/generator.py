@@ -21,7 +21,7 @@ import shutil
 import datetime
 
 import jinja2
-import markdown2_fork as markdown2
+import markdown
 
 from owl.log_handler import LOGGER as logger
 
@@ -52,19 +52,22 @@ def generate_html(markdown_files):
                 raise
 
         with open(markdown_file.source_file, 'r') as file_handle:
-            text = file_handle.read()
+            text = file_handle.read().decode('utf-8')
 
         with open(markdown_file.destination_file, 'w') as file_handle:
+            markdown_object = markdown.Markdown(extensions=['meta'])
+            markdown_html = markdown_object.convert(text)
+
+            # Update the title, if the title attribute is in the parsed metadata
+            if 'title' in markdown_object.Meta:
+                markdown_file.set_metadata(
+                    'title', markdown_object.Meta['title'][0])
+
             html = template.render(
                 {
                     'title': markdown_file.get_metadata('title'),
                     'destination_root_dir': markdown_file.destination_root_dir,
-                    'markdown_html': markdown2.markdown(
-                        text,
-                        extras=[
-                            'fenced-code-blocks',
-                            'wiki-tables',
-                            'metadata'])
+                    'markdown_html': markdown_html
                 })
             file_handle.write(html.encode('utf-8'))
 
