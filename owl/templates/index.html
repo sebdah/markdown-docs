@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title>Owl documentation</title>
+  <link rel="stylesheet" type="text/css" href="_owl_static/css/owl.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="_owl_static/css/markdown.css" media="screen" />
+  <script src="_owl_static/js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript">
+  $("document").ready(function() {
+    $("#filter"). keyup(function() {
+      var terms = $(this).val().toLowerCase();
+      if (!terms) {
+        $(".option").show();
+      } else {
+        $(".option").hide().filter(function() {
+          return $(this).children(".path").val().toLowerCase().indexOf(terms) > -1;
+      }).show();
+      }
+    });
+  });
+  </script>
+</head>
+<body>
+  <div id='owl-title'>
+    <span class='owl-title'>Owl documentation</span><br />
+    Filter: <input type='text' id='filter' class='owl-filter'></input>
+  </div>
+
+  <div id='owl-markdown-files'>
+    {% for markdown_file in markdown_metadata %}
+      {% if markdown_file.short_path %}
+        <div id='owl-markdown-file' class='option'>
+          <input type='hidden' class='path' value='{{ markdown_file.full_path }}/{{ markdown_file.title }}'>
+          <span class='owl-markdown-path'>{{ markdown_file.short_path }}</span>/<a href='{{ markdown_file.url }}'>{{ markdown_file.title }}</a>
+        </div>
+      {% else %}
+        <div id='owl-markdown-file' class='option'>
+          <input type='hidden' class='path' value='{{ markdown_file.full_path }}/{{ markdown_file.title }}'>
+          <a href='{{ markdown_file.url }}'>{{ markdown_file.title }}</a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <footer id='owl-footer'>
+    Documentation generated at {{ generation_timestamp }}. <br />
+    This documentation was generated using Owl, a project maintained by <a href='http://www.sebastiandahlgren.se'>Sebastian Dahlgren</a>.
+  </footer>
+</body>
+</html>
