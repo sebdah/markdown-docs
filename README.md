@@ -12,11 +12,12 @@ Features
 - Reads title from [metadata](http://pythonhosted.org/Markdown/extensions/meta_data.html)
 - Support for the [Markdown tables extension](http://pythonhosted.org/Markdown/extensions/tables.html)
 - No Internet connection needed
+- Owl comes with an embedded web server for serving static HTML locally
 
 Author
 ------
 
-This project is maintained by [Sebastian Dahlgren](http://www.sebastiandahlgren.se) ([GitHub](https://github.com/sebdah) | [Twitter](https://twitter.com/sebdah) | [LinkedIn](www.linkedin.com/in/sebastiandahlgren))
+This project is maintained by [Sebastian Dahlgren](http://www.sebastiandahlgren.se) ([GitHub](https://github.com/sebdah) | [Twitter](https://twitter.com/sebdah) | [LinkedIn](http://www.linkedin.com/in/sebastiandahlgren))
 
 License
 -------
