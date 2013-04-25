@@ -55,7 +55,12 @@ def generate_html(markdown_files):
             text = file_handle.read().decode('utf-8')
 
         with open(markdown_file.destination_file, 'w') as file_handle:
-            markdown_object = markdown.Markdown(extensions=['meta'])
+            markdown_object = markdown.Markdown(
+                extensions=[
+                    'meta',
+                    'toc',
+                    'tables',
+                    'codehilite(linenums=False)'])
             markdown_html = markdown_object.convert(text)
 
             # Update the title, if the title attribute is in the parsed metadata
@@ -67,7 +72,9 @@ def generate_html(markdown_files):
                 {
                     'title': markdown_file.get_metadata('title'),
                     'destination_root_dir': markdown_file.destination_root_dir,
-                    'markdown_html': markdown_html
+                    'markdown_html': markdown_html,
+                    'generation_timestamp': datetime.datetime.utcnow().strftime(
+                        '%Y-%m-%d %H:%M')
                 })
             file_handle.write(html.encode('utf-8'))
 

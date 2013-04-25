@@ -104,7 +104,7 @@ class MarkdownFile:
         """
         self.metadata[attribute] = value
 
-    def shorten_path(self, full_path, max_length=40):
+    def shorten_path(self, full_path, max_length=70):
         """ Takes a full path like/this/one and returns like/t/one
 
         The function will try to return as long paths as possible

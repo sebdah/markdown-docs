@@ -20,8 +20,11 @@ limitations under the License.
 
 import os
 import sys
+import shutil
 import tempfile
 import argparse
+
+from flask import Flask, redirect, send_from_directory
 
 import owl.generator
 from owl.markdown_file import MarkdownFile
@@ -36,22 +39,32 @@ def main():
         help='Root directory to parse from (default: current dir)')
     parser.add_argument('-o', '--output',
         help='Output directory to store HTML files in')
+    parser.add_argument('generate',
+        nargs='?',
+        default=False,
+        help='Generate HTML')
+    parser.add_argument('serve',
+        nargs='?',
+        default=True,
+        help='Start a local web server to serve the documentation')
     args = parser.parse_args()
 
     if args.directory:
         source_dir = os.path.expandvars(os.path.expanduser(args.directory))
 
         if not os.path.exists(source_dir):
-            print('{} does not exist'.format(source_dir))
+            logger.error('{} does not exist'.format(source_dir))
             sys.exit(1)
         elif not os.path.isdir(source_dir):
-            print('{} is not a directory'.format(source_dir))
+            logger.error('{} is not a directory'.format(source_dir))
             sys.exit(1)
     else:
         source_dir = os.path.realpath(os.path.curdir)
 
+    temp_dir_used = False
     if args.output:
-        destination_root_dir = os.path.expandvars(os.path.expanduser(args.output))
+        destination_root_dir = os.path.expandvars(
+            os.path.expanduser(args.output))
 
         try:
             os.makedirs(destination_root_dir)
@@ -60,18 +73,35 @@ def main():
                 # Code 17 == File exists
                 pass
             else:
-                print('Error creating {}: {}'.format(destination_root_dir, errmsg))
+                logger.error('Error creating {}: {}'.format(
+                    destination_root_dir, errmsg))
                 sys.exit(1)
     else:
         destination_root_dir = tempfile.mkdtemp(prefix='owl')
+        logger.debug('Using temporary folder: {}'.format(destination_root_dir))
+        if not args.generate:
+            temp_dir_used = True
 
-    markdown_files = find_markdown_files(source_dir, destination_root_dir)
-    logger.info('Generating documentation for {:d} markdown files..'.format(
-        len(markdown_files)))
-    owl.generator.generate_html(markdown_files)
-    owl.generator.generate_index_page(markdown_files)
-    owl.generator.import_static_files(destination_root_dir)
-    logger.info('Done with documentation generation!')
+    try:
+        markdown_files = find_markdown_files(source_dir, destination_root_dir)
+        logger.info('Generating documentation for {:d} markdown files..'.format(
+            len(markdown_files)))
+        owl.generator.generate_html(markdown_files)
+        owl.generator.generate_index_page(markdown_files)
+        owl.generator.import_static_files(destination_root_dir)
+        logger.info('Done with documentation generation!')
+
+        if args.serve and not args.generate:
+            run_webserver(destination_root_dir)
+        if args.generate:
+            logger.info('HTML output can be found in {}'.format(
+                destination_root_dir))
+
+    finally:
+        if temp_dir_used:
+            logger.debug('Removing temporary folder: {}'.format(
+                destination_root_dir))
+            shutil.rmtree(destination_root_dir)
 
 
 def find_markdown_files(source_dir, destination_root_dir):
@@ -102,3 +132,24 @@ def find_markdown_files(source_dir, destination_root_dir):
     for md_file in sorted(md_files_dict):
         markdown_files.append(md_files_dict[md_file])
     return markdown_files
+
+
+def run_webserver(destination_root_dir):
+    """ Run a local """
+    destination_root_dir = destination_root_dir
+    if destination_root_dir.startswith('/'):
+        destination_root_dir = destination_root_dir[1:]
+
+    if destination_root_dir.endswith('/'):
+        destination_root_dir = destination_root_dir[:-1]
+
+    app = Flask(__name__)
+    @app.route('/<path:filename>')
+    def index(filename='index.html'):
+        if filename.startswith(destination_root_dir):
+            filename = filename.replace('{}/'.format(destination_root_dir), '')
+            return redirect('/{}'.format(filename))
+        return send_from_directory('/{}'.format(destination_root_dir), filename)
+
+    app.run()
+
