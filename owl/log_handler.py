@@ -93,3 +93,5 @@ def get_logger(level='info'):
     :returns: LogHandler object
     """
     return LogHandler(level=level)
+
+LOGGER = get_logger()
