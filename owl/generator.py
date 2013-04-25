@@ -21,7 +21,7 @@ import shutil
 import datetime
 
 import jinja2
-import markdown2
+import markdown2_fork as markdown2
 
 from owl.log_handler import LOGGER as logger
 
