@@ -79,13 +79,30 @@ code, tt {
   background-color: #f8f8f8;
   border-radius: 3px; }
 
-pre code {
-  margin: 0 0 0 10px;
-  padding: 0;
-  white-space: pre;
-  border: 1px solid #eaeaea;
-  background-color: #f8f8f8;
-  border-radius: 3px; }
+code, pre {
+    border-radius: 3px;
+    background-color: #F8F8F8;
+    color: inherit;
+}
+
+code {
+    border: 1px solid #EAEAEA;
+    margin: 0 2px;
+    padding: 0 5px;
+}
+
+pre {
+    border: 1px solid #CCCCCC;
+    line-height: 1.25em;
+    overflow: auto;
+    padding: 6px 10px;
+}
+
+pre > code {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
 
 a {
   color: #2484c1;
