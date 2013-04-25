@@ -11,7 +11,11 @@
 
   <div id='owl-markdown-files'>
     {% for markdown_file in markdown_metadata %}
-      <span class='owl-markdown-path'>{{ markdown_file.short_path }}</span>/<a href='{{ markdown_file.url }}'>{{ markdown_file.title }}</a><br />
+      {% if markdown_file.short_path %}
+        <span class='owl-markdown-path'>{{ markdown_file.short_path }}</span>/<a href='{{ markdown_file.url }}'>{{ markdown_file.title }}</a><br />
+      {% else %}
+        <a href='{{ markdown_file.url }}'>{{ markdown_file.title }}</a><br />
+      {% endif %}
     {% endfor %}
   </div>
 

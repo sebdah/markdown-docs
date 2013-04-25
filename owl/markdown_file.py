@@ -77,7 +77,7 @@ class MarkdownFile:
     def generate_metadata(self):
         """ Populate the metadata for this markdown object """
         self.metadata = {
-            'title': os.path.basename(self.source_file),
+            'title': os.path.basename(self.source_file).rsplit('.', 1)[0],
             'url': self.relative_destination_file,
             'full_path': os.path.dirname(self.relative_destination_file),
             'short_path': self.shorten_path(
