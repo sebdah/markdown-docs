@@ -1,6 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-""" Owl markdown documentation reader """
+""" Owl markdown documentation reader
+
+APACHE LICENSE 2.0
+Copyright 2013 Sebastian Dahlgren
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+"""
 
 import os
 import sys
@@ -12,7 +28,10 @@ import datetime
 import jinja2
 import markdown2
 
-from markdown_file import MarkdownFile
+from owl.markdown_file import MarkdownFile
+from owl.log_handler import get_logger
+
+LOGGER = get_logger()
 
 
 def main():
@@ -53,9 +72,12 @@ def main():
         destination_root_dir = tempfile.mkdtemp(prefix='owl')
 
     markdown_files = find_markdown_files(source_dir, destination_root_dir)
+    LOGGER.info('Generating documentation for {:d} markdown files..'.format(
+        len(markdown_files)))
     generate_html(markdown_files)
     generate_index_page(markdown_files)
     import_static_files(destination_root_dir)
+    LOGGER.info('Done with documentation generation!')
 
 
 def find_markdown_files(source_dir, destination_root_dir):
@@ -100,7 +122,8 @@ def generate_html(markdown_files):
     template = env.get_template('markdown-template.html')
 
     for markdown_file in markdown_files:
-        print('Generating HTML for {}..'.format(markdown_file.source_file))
+        LOGGER.debug(
+            'Generating HTML for {}..'.format(markdown_file.source_file))
 
         # Ensure that the output directory exists
         try:
@@ -127,7 +150,7 @@ def generate_html(markdown_files):
 
             file_handle.write(html)
 
-        print('Wrote {}'.format(markdown_file.destination_file))
+        LOGGER.debug('Wrote {}'.format(markdown_file.destination_file))
 
 
 def generate_index_page(markdown_files):
@@ -136,7 +159,7 @@ def generate_index_page(markdown_files):
     :type markdown_files: list
     :param markdown_files: List of MarkdownFile objects to print to the index
     """
-    print('Generating index page..')
+    LOGGER.debug('Generating index page..')
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(
             os.path.join(os.path.dirname(__file__), 'templates')))
