@@ -1,9 +1,9 @@
 <html>
 <head>
-  <title>Owl documentation</title>
-  <link rel="stylesheet" type="text/css" href="_owl_static/css/owl.css" media="screen" />
-  <link rel="stylesheet" type="text/css" href="_owl_static/css/markdown.css" media="screen" />
-  <script src="_owl_static/js/jquery-1.9.1.min.js"></script>
+  <title>Markdoc documentation</title>
+  <link rel="stylesheet" type="text/css" href="_markdoc_static/css/markdoc.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="_markdoc_static/css/markdown.css" media="screen" />
+  <script src="_markdoc_static/js/jquery-1.9.1.min.js"></script>
   <script type="text/javascript">
   $("document").ready(function() {
     $("#filter"). keyup(function() {
@@ -20,20 +20,20 @@
   </script>
 </head>
 <body>
-  <div id='owl-title'>
-    <span class='owl-title'>Owl documentation</span><br />
-    Filter: <input type='text' id='filter' class='owl-filter'></input>
+  <div id='markdoc-title'>
+    <span class='markdoc-title'>Markdoc documentation</span><br />
+    Filter: <input type='text' id='filter' class='markdoc-filter'></input>
   </div>
 
-  <div id='owl-markdown-files'>
+  <div id='markdoc-markdown-files'>
     {% for markdown_file in markdown_metadata %}
       {% if markdown_file.short_path %}
-        <div id='owl-markdown-file' class='option'>
+        <div id='markdoc-markdown-file' class='option'>
           <input type='hidden' class='path' value='{{ markdown_file.full_path }}/{{ markdown_file.title }}'>
-          <span class='owl-markdown-path'>{{ markdown_file.short_path }}</span>/<a href='{{ markdown_file.url }}'>{{ markdown_file.title }}</a>
+          <span class='markdoc-markdown-path'>{{ markdown_file.short_path }}</span>/<a href='{{ markdown_file.url }}'>{{ markdown_file.title }}</a>
         </div>
       {% else %}
-        <div id='owl-markdown-file' class='option'>
+        <div id='markdoc-markdown-file' class='option'>
           <input type='hidden' class='path' value='{{ markdown_file.full_path }}/{{ markdown_file.title }}'>
           <a href='{{ markdown_file.url }}'>{{ markdown_file.title }}</a>
         </div>
@@ -41,9 +41,9 @@
     {% endfor %}
   </div>
 
-  <footer id='owl-footer'>
+  <footer id='markdoc-footer'>
     Documentation generated at {{ generation_timestamp }}. <br />
-    This documentation was generated using Owl, a project maintained by <a href='http://www.sebastiandahlgren.se'>Sebastian Dahlgren</a>.
+    This documentation was generated using Markdoc, a project maintained by <a href='http://www.sebastiandahlgren.se'>Sebastian Dahlgren</a>.
   </footer>
 </body>
 </html>

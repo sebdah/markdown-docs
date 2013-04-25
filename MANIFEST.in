@@ -1,4 +1,4 @@
-recursive-include owl *
+recursive-include markdoc *
 include README
 include README.md
 include LICENSE
