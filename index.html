@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Markdown-docs by sebdah</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Markdown-docs</h1>
+        <p>markdown-docs is a documentation generator for projects using Markdown. The problem with having Markdown files spread around your project is that it is hard to get an overview of all your documentation. markdown-docs solves this by collecting all of your Markdown files into one browsable HTML hierarchy.</p>
+
+        <p class="view"><a href="https://github.com/sebdah/markdown-docs">View the Project on GitHub <small>sebdah/markdown-docs</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/sebdah/markdown-docs/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/sebdah/markdown-docs/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/sebdah/markdown-docs">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>markdown-docs - Documentation generator for Markdown projects</h1>
+
+<p>markdown-docs is a documentation generator for projects using Markdown. The problem with having Markdown files spread around your project is that it is hard to get an overview of all your documentation. markdown-docs solves this by collecting all of your Markdown files into one browsable HTML hierarchy.</p>
+
+<h2>Usage</h2>
+
+<h3>Browsing docs with the embedded web server</h3>
+
+<p>Run the following to fire up a local web server with your documentation</p>
+
+<pre><code>cd your/project/path
+markdown-docs
+</code></pre>
+
+<p>or</p>
+
+<pre><code>markdown-docs serve
+</code></pre>
+
+<p>Then point your browser to <a href="http://localhost:5000/">http://localhost:5000/</a>.</p>
+
+<h3>Generating HTML output</h3>
+
+<pre><code>cd your/project/path
+markdown-docs generate --output ~/docs
+</code></pre>
+
+<p>If you do not set <code>--output</code> a temporary directory will be created for you.</p>
+
+<h2>Installation</h2>
+
+<p>The easiest way is to install markdown-docs via <code>pip</code></p>
+
+<pre><code>pip install markdown-docs
+</code></pre>
+
+<h2>Features</h2>
+
+<ul>
+<li>Quick overview of all project Markdown files</li>
+<li>Adding <a href="http://pythonhosted.org/Markdown/extensions/toc.html">Table of contents</a>
+</li>
+<li><a href="http://pythonhosted.org/Markdown/extensions/code_hilite.html">Syntax highlighting</a></li>
+<li>Reads title from <a href="http://pythonhosted.org/Markdown/extensions/meta_data.html">metadata</a>
+</li>
+<li>Support for the <a href="http://pythonhosted.org/Markdown/extensions/tables.html">Markdown tables extension</a>
+</li>
+<li>No Internet connection needed</li>
+<li>markdown-docs comes with an embedded web server for serving static HTML locally</li>
+</ul><h3>Metadata details</h3>
+
+<p>markdown-docs is looking for Markdown meta data. Currently markdown-docs is only taking the <code>Title</code> meta data attribute in consideration. Meta data in Markdown looks like this</p>
+
+<pre><code>Title: Document title
+Date: 2013-04-25
+
+This is where my Markdown really starts
+</code></pre>
+
+<p>Using meta data in markdown-docs is optional. If the <code>Title</code> tag is there, markdown-docs will show that document title instead of the file name on the index page.</p>
+
+<h3>Syntax highlighting</h3>
+
+<p>markdown-docs supports syntax highlighting via the <code>Markdown</code> module. You can define the programming language by adding <code>:::language</code> as in this example</p>
+
+<pre><code>:::python
+print('This is highlighted as Python code')
+</code></pre>
+
+<p>More details can be found in the <a href="http://pythonhosted.org/Markdown/extensions/code_hilite.html">module docs</a>.</p>
+
+<h3>Adding Table of contents</h3>
+
+<p>A table of contents will be automatically generated in the HTML output if markdown-docs finds a <code>[TOC]</code> tag anywhere in the Markdown.</p>
+
+<pre><code># Table of contents
+
+[TOC]
+
+# My header
+
+## My subheader
+</code></pre>
+
+<h2>Release information</h2>
+
+<p><strong>0.2.0 (2013-04-26)</strong></p>
+
+<ul>
+<li>First public release</li>
+</ul><h2>Author</h2>
+
+<p>This project is maintained by <a href="http://www.sebastiandahlgren.se">Sebastian Dahlgren</a> (<a href="https://github.com/sebdah">GitHub</a> | <a href="https://twitter.com/sebdah">Twitter</a> | <a href="http://www.linkedin.com/in/sebastiandahlgren">LinkedIn</a>)</p>
+
+<h2>License</h2>
+
+<p>APACHE LICENSE 2.0
+Copyright 2013 Sebastian Dahlgren</p>
+
+<p>Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/sebdah">sebdah</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-37516009-5");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
