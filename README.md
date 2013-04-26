@@ -2,7 +2,7 @@
 
 markdown-docs is a documentation generator for projects using Markdown. The problem with having Markdown files spread around your project is that it is hard to get an overview of all your documentation. markdown-docs solves this by collecting all of your Markdown files into one browsable HTML hierarchy.
 
-<img scr='http://sebbdah.github.io/markdown-docs/img/screenshot.png'>
+<img scr='https://raw.github.com/sebdah/markdown-docs/gh-pages/img/screenshot.png'>
 
 ## Usage
 
