@@ -52,7 +52,12 @@ def generate_html(markdown_files):
                 raise
 
         with open(markdown_file.source_file, 'r') as file_handle:
-            text = file_handle.read().decode('utf-8')
+            try:
+                text = file_handle.read().decode('utf-8')
+            except UnicodeError:
+                logger.warning('UnicodeError when reading {}. Skipping.'.format(
+                    markdown_file.source_file))
+                pass
 
         with open(markdown_file.destination_file, 'w') as file_handle:
             markdown_object = markdown.Markdown(
