@@ -2,7 +2,7 @@
 from setuptools import setup
 
 
-setup(name='markdoc',
+setup(name='markdown-docs',
     version='0.1.0',
     license='Apache License, Version 2.0',
     description='Documentation generator for Markdown projects',
@@ -10,11 +10,11 @@ setup(name='markdoc',
     author_email='sebastian.dahlgren@gmail.com',
     maintainer='Sebastian Dahlgren',
     maintainer_email='sebastian.dahlgren@gmail.com',
-    url='http://sebdah.github.com/markdoc/',
+    url='http://sebdah.github.com/markdown-docs/',
     keywords="markdown documentation md mdown",
     platforms=['Any'],
-    packages=['markdoc'],
-    scripts=['scripts/markdoc'],
+    packages=['markdown-docs'],
+    scripts=['scripts/markdown-docs'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[

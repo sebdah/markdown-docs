@@ -1,0 +1,17 @@
+<html>
+<head>
+  <title>{{ title }} - markdown-docs</title>
+  <link rel="stylesheet" type="text/css" href="{{ destination_root_dir }}/_markdown-docs_static/css/markdown-docs.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="{{ destination_root_dir }}/_markdown-docs_static/css/markdown.css" media="screen" />
+</head>
+<body>
+  <a href='{{ destination_root_dir }}/index.html'>&lt; Back to index</a>
+  {{ markdown_html }}<br />
+  <a href='{{ destination_root_dir }}/index.html'>&lt; Back to index</a>
+
+  <footer id='markdown-docs-footer'>
+    Documentation generated at {{ generation_timestamp }}. <br />
+    This documentation was generated using markdown-docs, a project maintained by <a href='http://www.sebastiandahlgren.se'>Sebastian Dahlgren</a>.
+  </footer>
+</body>
+</html>
