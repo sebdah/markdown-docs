@@ -1,169 +1,33 @@
 @import url(http://fonts.googleapis.com/css?family=Vollkorn:400,400italic,700,700italic&subset=latin);
 
-html, body {
-  padding:1em;
-  margin:auto;
-  max-width:62em;
-  background:#fefefe; }
-
-body {
-  font: 1.3em "Vollkorn", Palatino, Times;
-  color: #333;
-  line-height: 1.4; }
-
-header, nav, article, footer {
-  width: 62em;
-  margin:0 auto;}
-
-article {
-  margin-top: 4em;
-  margin-bottom: 4em;
-  min-height: 400px;}
-
-footer {
-  margin-bottom:50px;}
-
-video {
-  margin: 2em 0;
-  border:1px solid #ddd;}
-
-nav {
-  font-size: .9em;
-  font-style: italic;
-  border-bottom: 1px solid #ddd;
-  padding: 1em 0; }
-
-nav p {
-  margin: 0; }
-
-/* Typography
--------------------------------------------------------- */
-
-h1 {
-  margin-top: 0;
-  font-weight: normal; }
-
-h2 {
-  font-weight: normal; }
-
-h3 {
-  font-weight: normal;
-  font-style: italic;
-  margin-top:1em; }
-
-p {
-  margin-top:0;
-  -webkit-hypens:auto;
-  -moz-hypens:auto;
-  hyphens:auto; }
-
-ul {
-  list-style: square;
-  padding-left:1.2em; }
-
-ol {
-  padding-left:1.2em; }
-
-blockquote {
-  margin-left: 1em;
-  padding-left: 1em;
-  border-left: 1px solid #ddd; }
-
-code, tt {
-  font-family: "Consolas", "Menlo", "Monaco", monospace, serif;
-  font-size: .9em;
-  margin: 0 2px;
-  padding: 0 5px;
-  white-space: nowrap;
-  border: 1px solid #eaeaea;
-  background-color: #f8f8f8;
-  border-radius: 3px; }
-
-code, pre {
-    border-radius: 3px;
-    background-color: #F8F8F8;
-    color: inherit;
+#markdown-docs-title {
+  margin: 20px 0 10px;
+  padding: 0;
+  position: relative;
+  font-size: 0.8em;
 }
 
-code {
-    border: 1px solid #EAEAEA;
-    margin: 0 2px;
-    padding: 0 5px;
+.markdown-docs-title {
+  font: 2em "Vollkorn", Palatino, Times;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative;
 }
 
-pre {
-    border: 1px solid #CCCCCC;
-    line-height: 1.25em;
-    overflow: auto;
-    padding: 6px 10px;
+.markdown-docs-filter {
+  font: 0.8em "Vollkorn", Palatino, Times;
+  border: 1px #999999 dotted;
+  width: 300px;
 }
 
-pre > code {
-    border: 0;
-    margin: 0;
-    padding: 0;
+.markdown-docs-markdown-path {
+    color: #999999;
+    padding-top: 1em;
 }
 
-a {
-  color: #2484c1;
-  text-decoration: none; }
-
-a:hover {
-  text-decoration: underline; }
-
-a img {
-  border:none; }
-
-h1 a, h1 a:hover {
-  color: #333;
-  text-decoration: none; }
-
-hr {
-  color : #ddd;
-  height : 1px;
-  margin: 2em 0;
-  border-top : solid 1px #ddd;
-  border-bottom : none;
-  border-left: 0;
-  border-right: 0; }
-
-p#heart{
-  font-size: 2em;
-  line-height: 1;
-  text-align: center;
-  color: #ccc; }
-
-.red {
-  color:#B50000; }
-
-
-/* Home Page
---------------------------- */
-
-body#index li {
-  margin-bottom: 1em; }
-
-
-
-/* iPad
--------------------------------------------------------- */
-@media only screen and (max-device-width: 1024px) {
-body {
-  font-size: 120%;
-  line-height: 1.4;
-  }
-} /* @iPad */
-
-/* iPhone
--------------------------------------------------------- */
-@media only screen and (max-device-width: 480px) {
-body {
-  text-align: left;
-  }
-article, footer {
-  width: auto;
-  }
-article {
-  padding: 0 10px;
-  }
-} /* @iPhone */
+#markdown-docs-footer {
+    color: #cccccc;
+    font-size: 0.8em;
+    padding-top: 1em;
+}
