@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Logging management for Markdoc
+Logging management for markdown-docs
 
 APACHE LICENSE 2.0
 Copyright 2013 Sebastian Dahlgren
@@ -23,7 +23,7 @@ import logging
 
 class LogHandler:
     """ Logging class """
-    def __init__(self, name='markdoc', level='info',
+    def __init__(self, name='markdown-docs', level='info',
                  log_file=None, dry_run=False):
         """ Instanciate the logger
 

@@ -1,6 +1,6 @@
-# Markdoc - Documentation generator for Markdown projects
+# markdown-docs - Documentation generator for Markdown projects
 
-Markdoc is a documentation generator for projects using Markdown. The problem with having Markdown files spread around your project is that it is hard to get an overview of all your documentation. Markdoc solves this by collecting all of your Markdown files into one browsable HTML hierarchy.
+markdown-docs is a documentation generator for projects using Markdown. The problem with having Markdown files spread around your project is that it is hard to get an overview of all your documentation. markdown-docs solves this by collecting all of your Markdown files into one browsable HTML hierarchy.
 
 ## Usage
 
@@ -9,27 +9,27 @@ Markdoc is a documentation generator for projects using Markdown. The problem wi
 Run the following to fire up a local web server with your documentation
 
     cd your/project/path
-    markdoc
+    markdown-docs
 
 or
 
-    markdoc serve
+    markdown-docs serve
 
 Then point your browser to [http://localhost:5000/](http://localhost:5000/).
 
 ### Generating HTML output
 
     cd your/project/path
-    markdoc generate --output ~/docs
+    markdown-docs generate --output ~/docs
 
 If you do not set `--output` a temporary directory will be created for you.
 
 
 ## Installation
 
-The easiest way is to install Markdoc via `pip`
+The easiest way is to install markdown-docs via `pip`
 
-    pip install markdoc
+    pip install markdown-docs
 
 ## Features
 
@@ -39,22 +39,22 @@ The easiest way is to install Markdoc via `pip`
 - Reads title from [metadata](http://pythonhosted.org/Markdown/extensions/meta_data.html)
 - Support for the [Markdown tables extension](http://pythonhosted.org/Markdown/extensions/tables.html)
 - No Internet connection needed
-- Markdoc comes with an embedded web server for serving static HTML locally
+- markdown-docs comes with an embedded web server for serving static HTML locally
 
 ### Metadata details
 
-Markdoc is looking for Markdown meta data. Currently Markdoc is only taking the `Title` meta data attribute in consideration. Meta data in Markdown looks like this
+markdown-docs is looking for Markdown meta data. Currently markdown-docs is only taking the `Title` meta data attribute in consideration. Meta data in Markdown looks like this
 
     Title: Document title
     Date: 2013-04-25
 
     This is where my Markdown really starts
 
-Using meta data in Markdoc is optional. If the `Title` tag is there, Markdoc will show that document title instead of the file name on the index page.
+Using meta data in markdown-docs is optional. If the `Title` tag is there, markdown-docs will show that document title instead of the file name on the index page.
 
 ### Syntax highlighting
 
-Markdoc supports syntax highlighting via the `Markdown` module. You can define the programming language by adding `:::language` as in this example
+markdown-docs supports syntax highlighting via the `Markdown` module. You can define the programming language by adding `:::language` as in this example
 
     :::python
     print('This is highlighted as Python code')
@@ -63,7 +63,7 @@ More details can be found in the [module docs](http://pythonhosted.org/Markdown/
 
 ### Adding Table of contents
 
-A table of contents will be automatically generated in the HTML output if Markdoc finds a `[TOC]` tag anywhere in the Markdown.
+A table of contents will be automatically generated in the HTML output if markdown-docs finds a `[TOC]` tag anywhere in the Markdown.
 
     # Table of contents
 

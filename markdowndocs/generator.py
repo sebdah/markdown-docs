@@ -23,7 +23,7 @@ import datetime
 import jinja2
 import markdown
 
-from markdoc.log_handler import LOGGER as logger
+from markdowndocs.log_handler import LOGGER as logger
 
 
 def generate_html(markdown_files):
@@ -113,11 +113,11 @@ def import_static_files(destination_root_dir):
     :type destination_root_dir: str
     :param destination_root_dir: Destination folder for HTML pages
     """
-    if os.path.exists(os.path.join(destination_root_dir, '_markdoc_static')):
+    if os.path.exists(os.path.join(destination_root_dir, '_markdown-docs_static')):
         shutil.rmtree(
-            os.path.join(destination_root_dir, '_markdoc_static'),
+            os.path.join(destination_root_dir, '_markdown-docs_static'),
             ignore_errors=True)
 
     shutil.copytree(
         os.path.join(os.path.dirname(__file__), 'static'),
-        os.path.join(destination_root_dir, '_markdoc_static'))
+        os.path.join(destination_root_dir, '_markdown-docs_static'))
