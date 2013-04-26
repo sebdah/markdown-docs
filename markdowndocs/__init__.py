@@ -18,6 +18,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+VERSION = '0.2.0'
+
 import os
 import sys
 import shutil
@@ -38,6 +40,9 @@ def main():
         help='Root directory to parse from (default: current dir)')
     parser.add_argument('-o', '--output',
         help='Output directory to store HTML files in')
+    parser.add_argument('--version',
+        action='store_true',
+        help='Print version information')
     parser.add_argument('generate',
         nargs='?',
         default=False,
@@ -47,6 +52,10 @@ def main():
         default=True,
         help='Start a local web server to serve the documentation')
     args = parser.parse_args()
+
+    if args.version:
+        print_version()
+        sys.exit(0)
 
     if args.directory:
         source_dir = os.path.expandvars(os.path.expanduser(args.directory))
@@ -131,3 +140,8 @@ def find_markdown_files(source_dir, destination_root_dir):
     for md_file in sorted(md_files_dict):
         markdown_files.append(md_files_dict[md_file])
     return markdown_files
+
+
+def print_version():
+    """ Prints the version and exits """
+    print('markdown-doc: {}'.format(VERSION))

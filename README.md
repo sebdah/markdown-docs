@@ -73,6 +73,13 @@ A table of contents will be automatically generated in the HTML output if markdo
 
     ## My subheader
 
+Release information
+-------------------
+
+**0.2.0 (2013-04-26)**
+
+- First public release
+
 Author
 ------
 

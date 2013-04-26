@@ -3,7 +3,7 @@ from setuptools import setup
 
 
 setup(name='markdown-docs',
-    version='0.1.0',
+    version='0.2.0',
     license='Apache License, Version 2.0',
     description='Documentation generator for Markdown projects',
     author='Sebastian Dahlgren',
@@ -14,7 +14,7 @@ setup(name='markdown-docs',
     keywords="markdown documentation md mdown",
     platforms=['Any'],
     packages=['markdowndocs'],
-    scripts=['scripts/markdown-docs'],
+    scripts=['markdown-docs'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[
